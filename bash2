@@ -1,0 +1,23 @@
+#!/bin/bash
+domain=theforage.com
+list_resolver=resolvers.txt
+list_wordlist=subdomains.txt
+amass_config=~/.config/amass/config.ini
+dir=sab1
+
+echo "[=] Running Passive Enumeration"
+    subfinder -d $domain -o subfinder.txt &>/dev/null
+    assetfinder --subs-only $domain | sort -u > assetfinder.txt
+    amass enum -passive -norecursive -noalts -d $domain -o amass.txt &>/dev/null
+    findomain --quiet -t $domain -u findomain.txt &>/dev/null
+    cat subfinder.txt assetfinder.txt amass.txt findomain.txt | grep -F ".$domain" | sort -u > passive.txt
+    rm subfinder.txt assetfinder.txt amass.txt findomain.txt
+
+    echo "[=] Running Active Enumeration"
+    shuffledns -d $domain -w $list_wordlist -r $list_resolver -massdns /home/ec2-user/go/bin/massdns -o active_tmp.txt &>/dev/null
+    cat active_tmp.txt | grep -F ".$domain" | sed "s/*.//" > active.txt
+    rm active_tmp.txt
+    {
+    echo "[=] Collecting Active & Passive Enum Result"
+    cat active.txt passive.txt | grep -F ".$domain" | sort -u | shuffledns -d $domain -r $list_resolver -o active_passive.txt &>/dev/null
+}
