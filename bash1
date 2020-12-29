@@ -17,7 +17,7 @@ echo "[=] Running Passive Enumeration"
     shuffledns -d $domain -w $list_wordlist -r $list_resolver -massdns /home/ec2-user/go/bin/massdns -o active_tmp.txt &>/dev/null
     cat active_tmp.txt | grep -F ".$domain" | sed "s/*.//" > active.txt
     rm active_tmp.txt
-    {test
+    {
     echo "[=] Collecting Active & Passive Enum Result"
     cat active.txt passive.txt | grep -F ".$domain" | sort -u | shuffledns -d $domain -r $list_resolver -massdns /home/ec2-user/go/bin/massdns -o active_passive.txt &>/dev/null
     rm active.txt passive.txt
