@@ -28,7 +28,7 @@ echo "[=] Running Passive Enumeration"
     then
         echo "[=] Running Dual Permute Enumeration"
         dnsgen active_passive.txt | shuffledns -d $domain -r $list_resolver -massdns /home/ec2-user/go/bin/massdns -o permute1_tmp.txt &>/dev/null
-        cat permute1_tmp.txt | grep -F ".$domain" > permutestte1.txt 
+        cat permute1_tmp.txt | grep -F ".$domain" > permute1.txt 
         dnsgen permute1.txt | shuffledns -d $domain -r $list_resolver -massdns /home/ec2-user/go/bin/massdns -o permute2_tmp.txt &>/dev/null
         cat permute2_tmp.txt | grep -F ".$domain" > permute2.txt
         cat permute1.txt permute2.txt | grep -F ".$domain" | sort -u > permute.txt
