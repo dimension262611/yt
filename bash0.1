@@ -1,0 +1,14 @@
+#!/bin/bash
+domain=choicehotels.com
+list_resolver=resolvers.txt
+list_wordlist=subdomains.txt
+amass_config=~/.config/amass/config.ini
+dir=sab1
+
+echo "[=] Running Passive Enumeration"
+    subfinder -d $domain -o subfinder.txt &>/dev/null
+    assetfinder --subs-only $domain | sort -u > assetfinder.txt
+    amass enum -passive -norecursive -noalts -d $domain -o amass.txt &>/dev/null
+    findomain --quiet -t $domain -u findomain.txt &>/dev/null
+    cat subfinder.txt assetfinder.txt amass.txt findomain.txt | grep -F ".$domain" | sort -u > passive.txt
+    rm subfinder.txt assetfinder.txt amass.txt findomain.txt
