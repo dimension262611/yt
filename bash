@@ -1,5 +1,5 @@
 #!/bin/bash
-domain=theforage.com
+domain=oyorooms.com
 list_resolver=resolvers.txt
 list_wordlist=subdomains.txt
 amass_config=~/.config/amass/config.ini
