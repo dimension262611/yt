@@ -1,5 +1,5 @@
 #!/bin/bash
-domain=oyorooms.com
+domain=pinnaclecad.com
 list_resolver=resolvers.txt
 list_wordlist=subdomains.txt
 amass_config=~/.config/amass/config.ini
