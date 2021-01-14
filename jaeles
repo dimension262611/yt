@@ -1,0 +1,1 @@
+chaos -key 819a31d070e2e20c45b271027da94bc6b9ee9b34ac9d2c6c5907d27bc566410c -d $domainpinnaclecad.com | httpx -silent | anew | xargs -I@ jaeles scan -c 100 -s /root/.jaeles/base-signatures/ -u @ 
