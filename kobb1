@@ -1,0 +1,22 @@
+#!/bin/bash
+#Install Golang.
+sudo apt-get update
+sudo apt-get -y install wget git gcc python3 make python3-pip
+echo -e "Installing Go-Lang";
+wget -q -O - https://git.io/vQhTU | bash
+source ~/.bashrc
+echo -e " ";
+go get -u github.com/tomnomnom/assetfinder
+GO111MODULE=on go get -v github.com/projectdiscovery/chaos-client/cmd/chaos
+go get -u github.com/tomnomnom/anew
+GO111MODULE=on go get github.com/jaeles-project/jaeles
+jaeles config init
+GO111MODULE=on go get -v github.com/projectdiscovery/httpx/cmd/httpx
+go get -u github.com/tomnomnom/qsreplace
+
+git clone https://github.com/GerbenJavado/LinkFinder.git
+cd LinkFinder
+python3 setup.py install
+go get -u github.com/tomnomnom/gf
+echo 'source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.bash' >> ~/.bashrc
+source ~/.bashrc
