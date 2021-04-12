@@ -1,5 +1,5 @@
 #!/bin/bash
-urls=cc.vimeo
+urls=$1
 y=$(wc -l $urls |grep -Eo [0-9]+);
 echo $y;
 counter=1;
